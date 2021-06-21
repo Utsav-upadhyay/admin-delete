@@ -1,0 +1,28 @@
+
+<div class="d-flex" id="wrapper">
+	<div class="container-fluid" style="height:100vh; background-color:#f8f9fa;">
+	  <!-- delete article form 1 -->
+        <section class="col-md-5 mx-auto bg-white mt-5 p-3 rounded">
+		   <h1 class="title text-center" style="font-size: 1.2em; color: #2262A0;">
+			<img src="assets/images/logo.jpg" width="150">
+		   </h1>
+		   <form class="contact-form row">
+			  <div class="form-field col-lg-12">
+				 <input id="name" [(ngModel)]="loginuserdata.email" class="input-text js-input" type="text"  placeholder="Email" name="email" required="">
+			  </div>
+			  <div class="form-field col-lg-12 ">
+
+				 <input type="password" id="company" required [(ngModel)]="loginuserdata.password" class="input-text js-input" placeholder="Password" required="" [ngModelOptions]="{standalone: true}">
+
+
+				</div>
+			  <div class="form-field col-lg-12">
+				 <input class="submit-btn w-100"  routerLink="/home/deletearticle"  (click)="loginuser()" value="Submit">
+			  </div>
+		   </form>
+		</section>
+
+
+
+      </div>
+</div>

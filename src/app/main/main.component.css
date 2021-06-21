@@ -1,0 +1,13 @@
+.search-result {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.search-result li {
+  list-style: none;
+  cursor: pointer;
+}
+
+.search-result li:hover {
+  background-color: #ddd;
+}
