@@ -9,13 +9,15 @@ import { MainComponent } from './main/main.component';
 import { DeletearticleComponent } from './main/deletearticle/deletearticle.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
+import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     DeletearticleComponent,
-    LoginComponent
+    LoginComponent,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ArticleService } from '../article.service';
 import { IArticle, IPub } from '../models/pub.model';
 
@@ -24,8 +25,9 @@ export class MainComponent implements OnInit {
   articleTitleKeyUp: any;
   pubTitleKeyUp: any;
   allArticles: any[];
+  isLoading: boolean;
 
-  constructor(private article: ArticleService) {
+  constructor(private article: ArticleService, private router: Router) {
 
   }
 
@@ -85,18 +87,23 @@ export class MainComponent implements OnInit {
       })
     }
 
+    this.isLoading = true
+
     this.article
       .postArticlesData({
         pubid: this.selectedPub.PubId,
         pubdate: this.selectedDate,
       })
       .subscribe((data: any) => {
+        this.isLoading = false
         this.allArticles = data.result || [];
 
         this.articles = this.allArticles.filter(p => {
           let title = p.Title.toLowerCase()
           return title.substring(0, kl) == k.toLowerCase()
         })
+      }, (e) => {
+        this.isLoading = false
       });
   }
 
@@ -116,12 +123,7 @@ export class MainComponent implements OnInit {
   /* ON submit form */
   onSubmit() {
     if (this.selectedArticle && this.selectedDate && this.selectedPub) {
-      this.article
-        .getArticlesData({ articleid: this.selectedArticle.ArticleID })
-        .subscribe((data: any) => {
-          this.articleDetails = data.result[0];
-          console.log(this.articleDetails);
-        });
+      this.router.navigateByUrl('delete-article/' + this.selectedArticle.ArticleID)
     } else {
       alert('Please select Caldendar, and Publication');
     }

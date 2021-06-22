@@ -1,1 +1,42 @@
-<p>deletearticle works!</p>
+<!-- delete article form 2 -->
+<section class="admin-form" *ngIf="articleDetails">
+  <form class="contact-form row">
+    <div class="form-field col-lg-6">
+      <label class="label" for="name">Article ID</label>
+      <label class="label infolabel" for="name"> {{ articleDetails.articleid }} </label>
+    </div>
+    <div class="form-field col-lg-6 ">
+      <label class="label" for="company">Title</label>
+      <label class="label infolabel" for="company"> {{ articleDetails.Title }} </label>
+    </div>
+    <div class="form-field col-lg-6">
+      <label class="label" for="message">Publication, Edition</label>
+      <label class="label infolabel" for="message"> {{ articleDetails.publication }} - {{
+							articleDetails.Edition }} </label>
+    </div>
+    <div class="form-field col-lg-6">
+      <label class="label" for="name">Keywords</label>
+      <div style="border: solid 1px #9a9a9a; padding: 5px; height:80px; overflow-y:scroll; color:#000;">
+        <span class="infolabel">
+          {{ articleDetails.keyword }}
+        </span>
+      </div>
+    </div>
+    <div class="form-field col-lg-6 ">
+      <label class="label" for="company">Date</label>
+      <label class="label infolabel" for="company"> {{ articleDetails.pubdate | date:'dd-MM-YYYY' }} </label>
+    </div>
+    <div class="form-field col-lg-6">
+      <label class="label" for="message">AVE</label>
+      <label class="label infolabel" for="message"> {{ articleDetails.ave }} </label>
+    </div>
+    <div class="form-field col-lg-6">
+      <label class="label" for="message">User</label>
+      <label class="label infolabel" for="message"> {{ articleDetails.userid }} </label>
+    </div>
+    <div class="form-field col-lg-12">
+      <input class="submit-btn" type="button" value="Delete" data-toggle="modal" data-target="#popup1">
+    </div>
+  </form>
+</section>
+<!-- delete article form 2 end -->

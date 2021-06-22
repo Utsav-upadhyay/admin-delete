@@ -4,22 +4,35 @@ import { MainComponent } from './main/main.component';
 import { DeletearticleComponent } from './main/deletearticle/deletearticle.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { LayoutComponent } from './layout/layout.component';
 
 
 const routes: Routes = [
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: '/login'
+  },
   {
     path: 'login',
     pathMatch: 'full',
     component: LoginComponent
   },
   {
-    path: 'home',
-    component: MainComponent,
-    // canActivate: [AuthGuardService],
-    children: [{
-      path: 'deletearticle',
-      component: DeletearticleComponent
-    }]
+    path: '',
+    component: LayoutComponent,
+    children: [
+      {
+        path: 'home',
+        component: MainComponent,
+        // canActivate: [AuthGuardService]
+      },
+      {
+        path: 'delete-article/:id',
+        component: DeletearticleComponent,
+        // canActivate: [AuthGuardService],
+      }
+    ]
   }
 ];
 
