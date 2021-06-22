@@ -14,12 +14,16 @@ declare const $: any;
 export class MainComponent implements OnInit {
   selectedDate: string;
   selectedPub: IPub;
+  allPubs: IPub[];
   publications: IPub[];
   articles: any[];
   selectedArticle: { ArticleID: string; Title: string };
   articleDetails: IArticle;
-  articleTitle: any;
   yesterday = new Date();
+
+  articleTitleKeyUp: any;
+  pubTitleKeyUp: any;
+  allArticles: any[];
 
   constructor(private article: ArticleService) {
 
@@ -36,7 +40,7 @@ export class MainComponent implements OnInit {
     /* API Call for publications when page load */
 
     this.article.postPublication(null).subscribe((data: any) => {
-      this.publications = data.result;
+      this.allPubs = data.result;
       console.log(this.publications);
     });
   }
@@ -47,9 +51,38 @@ export class MainComponent implements OnInit {
 
   /* POST article with PUB id and Date */
 
-  postArticles() {
-    if (!this.selectedPub ) {
+  keyUpPublication(e) {
+    let k = e as string
+    let kl = k.length
+
+    this.publications = this.allPubs.filter(p => {
+      let title = p.Title.toLowerCase()
+      return title.substring(0, kl) == k.toLowerCase()
+    })
+  }
+
+  onClickPublication(pub: IPub) {
+    this.pubTitleKeyUp = pub.Title;
+    this.selectedPub = pub
+    this.publications = []
+  }
+
+
+  /* POST article with PUB id and Date */
+
+  keyUpArticle(e) {
+    if (!this.selectedPub) {
       return alert('Please select a Date and publication first!');
+    }
+
+    let k = e as string
+    let kl = k.length
+
+    if (this.allArticles?.length) {
+      return this.articles = this.allPubs.filter(p => {
+        let title = p.Title.toLowerCase()
+        return title.substring(0, kl) == k.toLowerCase()
+      })
     }
 
     this.article
@@ -58,14 +91,19 @@ export class MainComponent implements OnInit {
         pubdate: this.selectedDate,
       })
       .subscribe((data: any) => {
-        this.articles = data.result || [];
+        this.allArticles = data.result || [];
+
+        this.articles = this.allArticles.filter(p => {
+          let title = p.Title.toLowerCase()
+          return title.substring(0, kl) == k.toLowerCase()
+        })
       });
   }
 
   /* When article gets clicked */
   onClickArticle(article) {
     // console.log(article);
-    this.articleTitle = article.Title;
+    this.articleTitleKeyUp = article.Title;
     this.selectedArticle = article;
     this.articles = [];
   }

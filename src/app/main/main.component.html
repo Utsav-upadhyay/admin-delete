@@ -72,24 +72,28 @@
 				<form class="contact-form row">
 					<div class="form-field col-lg-12">
 						<label class="label" for="name">Date</label>
-						<input class="input-text js-input" [(ngModel)]="selectedDate" name="date" type="date" max="{{yesterday | date:'yyyy-MM-dd'}}" required>
+						<input class="input-text js-input" [(ngModel)]="selectedDate" name="date" type="date"
+							max="{{yesterday | date:'yyyy-MM-dd'}}" required>
 					</div>
 					<div class="form-field col-lg-12 ">
 						<label class="label" for="company">Publication</label>
 
-						<select name="publication" class="input-text" [(ngModel)]="selectedPub" required
-							(ngModelChange)="onPubChange()">
+						<input [(ngModel)]="pubTitleKeyUp" (ngModelChange)="keyUpPublication(pubTitleKeyUp)" name="pub"
+							class="input-text js-input" type="text" required>
 
-							<option [ngValue]="null"> --Select Publication-- </option>
 
-							<option *ngFor="let pub of publications" [ngValue]="pub"> {{ pub.Title }} - {{ pub.city }}
-							</option>
+						<div class="search-result" *ngIf="publications">
+							<ul>
+								<li *ngFor="let pub of publications">
+									<a (click)="onClickPublication(pub)"> {{ pub.Title }} - {{ pub.city }} </a>
+								</li>
+							</ul>
+						</div>
 
-						</select>
 					</div>
 					<div class="form-field col-lg-12">
 						<label class="label" for="message">Headline</label>
-						<input (keyup)="postArticles()" [(ngModel)]="articleTitle" name="article"
+						<input [(ngModel)]="articleTitleKeyUp" (ngModelChange)="keyUpArticle(articleTitleKeyUp)" name="article"
 							class="input-text js-input" type="text" required>
 
 
@@ -128,8 +132,7 @@
 					</div>
 					<div class="form-field col-lg-6">
 						<label class="label" for="name">Keywords</label>
-						<div
-							style="border: solid 1px #9a9a9a; padding: 5px; height:80px; overflow-y:scroll; color:#000;">
+						<div style="border: solid 1px #9a9a9a; padding: 5px; height:80px; overflow-y:scroll; color:#000;">
 							<span class="infolabel">
 								{{ articleDetails.keyword }}
 							</span>
@@ -148,8 +151,7 @@
 						<label class="label infolabel" for="message"> {{ articleDetails.userid }} </label>
 					</div>
 					<div class="form-field col-lg-12">
-						<input class="submit-btn" type="button" value="Delete" data-toggle="modal"
-							data-target="#popup1">
+						<input class="submit-btn" type="button" value="Delete" data-toggle="modal" data-target="#popup1">
 					</div>
 				</form>
 			</section>
@@ -172,8 +174,8 @@
 						</div>
 						<div class="modal-footer border-0 contact-form">
 							<button type="button" class="modalbtn2" data-dismiss="modal">No</button>
-							<button type="button" class="modalbtn1" value="Delete" data-dismiss="modal"
-								data-toggle="modal" data-target="#popup2">Yes</button>
+							<button type="button" class="modalbtn1" value="Delete" data-dismiss="modal" data-toggle="modal"
+								data-target="#popup2">Yes</button>
 						</div>
 					</div>
 				</div>
