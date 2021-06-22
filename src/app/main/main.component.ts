@@ -64,7 +64,7 @@ export class MainComponent implements OnInit {
   }
 
   onClickPublication(pub: IPub) {
-    this.pubTitleKeyUp = pub.Title;
+    this.pubTitleKeyUp = pub.Title + ' - ' + pub.city;
     this.selectedPub = pub
     this.publications = []
   }
@@ -81,7 +81,7 @@ export class MainComponent implements OnInit {
     let kl = k.length
 
     if (this.allArticles?.length) {
-      return this.articles = this.allPubs.filter(p => {
+      return this.articles = this.allArticles.filter(p => {
         let title = p.Title.toLowerCase()
         return title.substring(0, kl) == k.toLowerCase()
       })
