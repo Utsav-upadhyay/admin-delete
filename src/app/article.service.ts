@@ -139,9 +139,14 @@ export class ArticleService {
   postArticlesData(payload) {
     return this.http.post(environment.api_url + '/articles/articleslistData', payload)
   }
-
+  
   getArticlesData(payload) {
     return this.http.post(environment.api_url + '/articles/articledetailsData', payload)
+  }
+
+
+  deleteArticlesData(payload) {
+    return this.http.post(environment.api_url + '/articles/articlesDelete', payload)
   }
 
 }
